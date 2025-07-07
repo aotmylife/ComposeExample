@@ -7,6 +7,6 @@ Use this as a starting point for building beautiful and responsive Android apps.
 ---
 
 <p align="center">
-  <img src="images/simple_image" alt="Jetpack Compose Example Preview" width="400"/>
+  <img src="simple_image" alt="Jetpack Compose Example Preview" width="400"/>
 </p>
 
