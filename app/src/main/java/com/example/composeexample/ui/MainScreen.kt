@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -22,8 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -53,35 +52,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.composeexample.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
     val context = LocalContext.current
-    val chocoBoCharacters = listOf(
-        "chocobo" to R.drawable.chocobo,
-        "Mog" to R.drawable.mog,
-        "Golem" to R.drawable.golem,
-        "Goblin" to R.drawable.goblin,
-        "Black Mage (Black Magician)" to R.drawable.blackmage,
-        "White Mage" to R.drawable.white_magic,
-        "Chubby Chocobo" to R.drawable.chubby,
-        "Behemoth" to R.drawable.behemoth,
-        "Bahamut" to R.drawable.bahamut,
-        "Squall Leonhart" to R.drawable.squall_leonhart
-    )
 
     var inputText by remember { mutableStateOf("") }
 
-    val filteredList = chocoBoCharacters.filter { it.first.contains(inputText, ignoreCase = true) }
+    val filteredList =
+        viewModel.chocoBoCharacters.filter { it.first.contains(inputText, ignoreCase = true) }
 
     val focusManager = LocalFocusManager.current
 
     Surface(
         // EdgeToEdge
-        modifier = Modifier
-            .systemBarsPadding()
+        modifier = Modifier.navigationBarsPadding()
     ) {
 
         Column(
@@ -99,7 +85,7 @@ fun MainScreen(viewModel: MainViewModel) {
                     IconButton(onClick = {
                         Toast.makeText(context, "Back", Toast.LENGTH_SHORT).show()
                     }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
