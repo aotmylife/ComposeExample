@@ -44,6 +44,7 @@ class MainActivity : ComponentActivity() {
 }
 
 private val DarkColorScheme = darkColorScheme(
+
     surface = Blue,
     onSurface = Navy,
     primary = Navy,
@@ -56,37 +57,6 @@ private val LightColorScheme = lightColorScheme(
     primary = LightBlue,
     onPrimary = Navy
 )
-
-
-@Composable
-fun MyTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColors: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColors && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
-        }
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = MaterialTheme.typography,
-        content = content
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
